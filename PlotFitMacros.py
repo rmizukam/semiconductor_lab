@@ -5,13 +5,13 @@ from scipy.optimize import curve_fit
 import math
 
 
-def lin_func(x,b,m):
+def linFunc(x,b,m):
     y = b + m * x
     return y
 
-def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
+def linErrPlt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
         ydata, yerror, show_fit):
-    fig_name = plt.figure(fig_num)
+    fig_name= plt.figure(fig_num, figsize=(12,8))
     plt.xlabel(xlabel, fontsize = 12)
     plt.ylabel(ylabel, fontsize = 12)
     plt.title(title, fontsize = 12)
@@ -28,7 +28,7 @@ def linerrplt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
         plt.plot(fit_x_span, lin_func(fit_x_span, fit_b, fit_m), c = 'r')
     return fit_m, fit_b, del_fit_m, del_fit_b, fig_name
 
-def errpropdiv(x,y,dx,dy):
+def errPropDiv(x,y,dx,dy):
     if type(x) == np.ndarray:
         array = [0] * len(x)
         for t in range(0, len(x)):
@@ -40,7 +40,7 @@ def errpropdiv(x,y,dx,dy):
     else:
         print('You Passed Data Unusable For This Program')
 
-def errpropmultiply(x, y, dx, dy):
+def errPropMultiply(x, y, dx, dy):
     if type(x) == np.ndarray:
         array = [0]*len(x)
         for t in range(0,len(x)):
@@ -52,7 +52,7 @@ def errpropmultiply(x, y, dx, dy):
     else:
         print('You Passed Data Unusable For This Program')
 
-def errpropaddsubtract(dx,dy):
+def errPropAddSubtract(dx,dy):
     if type(dx)== np.ndarray and type(dy)==np.ndarray:
         if len(dx) != len(dy):
             yy = [dy]*len(dx)
@@ -74,10 +74,10 @@ def errpropaddsubtract(dx,dy):
     elif type(dx) != np.ndarray and type(dy) != np.ndarray:
         return math.sqrt(dx**2 + dy**2)
 
-def errconst(c,x):
+def errConst(c,x):
     return abs(c*x)
 
-def errpow(x,dx,pow_factor):
+def errPow(x,dx,pow_factor):
     if type(x) == np.ndarray:
         array = [0]*len(x)
         for t in range(0,len(x)):
@@ -85,5 +85,15 @@ def errpow(x,dx,pow_factor):
     elif type(x) == int or type(x) == np.float64:
         return abs(pow_factor) * x^(pow_factor - 1) * dx
 
-def uncertinmean(data):
+def roughPlt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata, ydata):
+    fig_name= plt.figure(fig_num, figsize=(12,8))
+    plt.xlabel(xlabel, fontsize = 12)
+    plt.ylabel(ylabel, fontsize = 12)
+    plt.title(title, fontsize = 12)
+    plt.xscale(xscale)
+    plt.yscale(yscale)
+    plt.plot(xdata,ydata,'ro')
+    return fig_name
+
+def uncertinMean(data):
     return (np.amax(data) - np.amin(data)) / (2*math.sqrt(len(data)))
