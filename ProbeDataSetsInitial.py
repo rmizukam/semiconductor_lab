@@ -10,12 +10,13 @@ bbxPos = pd.read_csv('breakOutBoxPos.txt',delimiter='\t',header=None)
 psNeg = pd.read_csv('probeStationNeg.txt',delimiter='\t',header=None)
 psPos = pd.read_csv('probeStationPos.txt',delimiter='\t',header=None)
 
+
 p1 =roughPlt(1, 'Instructor IV Curve', 'Voltage [V]', 'Current [A]','linear',\
     'linear', negIns1[0][:] + posIns1[0][:], negIns1[1][:] + posIns1[1][:])
 p2 =roughPlt(2, 'Semiconductor Probe Station IV Curve', 'Voltage [V]', \
     'Current [A]','linear','linear', psNeg[0][:] + psPos[0][:], \
     psNeg[1][:] + psPos[1][:])
-p3 = roughPlt(3, 'Semiconductor Breakout Box IV Curve', 'Voltage [V]', \
+p3 =roughPlt(3, 'Semiconductor Breakout Box IV Curve', 'Voltage [V]', \
     'Current [A]','linear','linear', bbxNeg[0][:] + bbxPos[0][:], \
     bbxNeg[1][:] + bbxPos[1][:])
 
