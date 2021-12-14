@@ -18,14 +18,14 @@ def linErrPlt(fig_num, title, xlabel, ylabel, xscale, yscale, xdata,\
     plt.xscale(xscale)
     plt.yscale(yscale)
     plt.errorbar(xdata,ydata,yerror,fmt='.',c='c')
-    ans, cov = curve_fit(lin_func, xdata, ydata, sigma = yerror)
+    ans, cov = curve_fit(linFunc, xdata, ydata, sigma = yerror)
     fit_b = ans[0]
     fit_m = ans[1]
-    fit_x_span = np.arange(0, (np.amax(xdata)+1))
+    fit_x_span = np.arange((np.amin(xdata)), (np.amax(xdata)))
     del_fit_b = math.sqrt(cov[0][0])
     del_fit_m = math.sqrt(cov[1][1])
     if show_fit == 'y' or show_fit == 'yes':
-        plt.plot(fit_x_span, lin_func(fit_x_span, fit_b, fit_m), c = 'r')
+        plt.plot(fit_x_span, linFunc(fit_x_span, fit_b, fit_m), 'r-')
     return fit_m, fit_b, del_fit_m, del_fit_b, fig_name
 
 def errPropDiv(x,y,dx,dy):
