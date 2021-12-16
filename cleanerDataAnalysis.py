@@ -46,7 +46,7 @@ def phiHeight(fig_num,k):
     fig_name=plt.figure(fig_num)
     plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
     plt.ylabel('$ln(I/T^2)$', fontsize = 12)
-    plt.title('Energy Barrier for Semiconductor', fontsize = 12)
+    # plt.title(title, fontsize = 12)
     plt.errorbar(x,yy,yerr,fmt='.',c='c')
     # plt.xticks()
     ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
@@ -60,13 +60,14 @@ def phiHeight(fig_num,k):
     return fig_name, phi
 
 
-p2, phi1 = phiHeight(2,0)
-p3, phi2 = phiHeight(3,3)
-p4, phi3 = phiHeight(4,5)
+p2, phi1 = phiHeight(2,0) # @ -5V (-4.99675000 V)
+p3, phi2 = phiHeight(3,3) # @ -4.7V
+p4, phi3 = phiHeight(4,5) # @ -4.5V
 
 meanphi = np.mean([phi1,phi2,phi3])
 dmeanphi = uncertinMean([phi1,phi2,phi3])
 print('SB Barrier = ', meanphi, ' +/- ', dmeanphi)
+# 0.35 +/- 0.04 eV
 
 
 # print(phi1)
