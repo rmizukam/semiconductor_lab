@@ -115,6 +115,7 @@ phi3 = (-(fit_m)*kb)
 
 
 
+
 print(phi1)
 print(phi2)
 print(phi3)
