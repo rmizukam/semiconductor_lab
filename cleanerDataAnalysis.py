@@ -81,6 +81,8 @@ dmeanphi = uncertinMean([phi1,phi2,phi3])
 print('SB Barrier = ', meanphi, ' +/- ', dmeanphi)
 # 0.35 +/- 0.04 eV
 
+
+#end of actual analysis, making graphs for report/ presentation
 #
 # k=0
 # temps = [300,285,270,240]
