@@ -45,7 +45,7 @@ plt.plot(ppms255[0][0:16], ppms255[1][0:16], 'y', label='255 K')
 plt.plot(ppms240[0][0:16], ppms240[1][0:16], 'm', label='240 K')
 plt.grid(True,which='both')
 
-def phiHeight(fig_num,k):
+def phiHeight(fig_num,k,title):
     temps = [300,285,270,240]
     x = np.divide(1,temps)
     yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
@@ -58,7 +58,7 @@ def phiHeight(fig_num,k):
     fig_name=plt.figure(fig_num)
     plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
     plt.ylabel('$ln(I/T^2)$', fontsize = 12)
-    # plt.title(title, fontsize = 12)
+    plt.title(title, fontsize = 12)
     plt.errorbar(x,yy,yerr,fmt='.',c='c')
     # plt.xticks()
     ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
@@ -72,10 +72,13 @@ def phiHeight(fig_num,k):
     return fig_name, phi
 
 
-p2, phi1 = phiHeight(2,0) # @ -5V (-4.99675000 V)
-p3, phi2 = phiHeight(3,3) # @ -4.7V
-p4, phi3 = phiHeight(4,5) # @ -4.5V
+p2, phi1 = phiHeight(2,0,'V = -5 V') # @ -5V (-4.99675000 V)
+p3, phi2 = phiHeight(3,3,'T = -4.7 V') # @ -4.7V
+p4, phi3 = phiHeight(4,5,'T = -4.5 V K') # @ -4.5V
 
+print(phi1)
+print(phi2)
+print(phi3)
 meanphi = np.mean([phi1,phi2,phi3])
 dmeanphi = uncertinMean([phi1,phi2,phi3])
 print('SB Barrier = ', meanphi, ' +/- ', dmeanphi)
