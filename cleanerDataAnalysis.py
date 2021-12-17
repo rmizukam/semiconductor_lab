@@ -81,10 +81,77 @@ dmeanphi = uncertinMean([phi1,phi2,phi3])
 print('SB Barrier = ', meanphi, ' +/- ', dmeanphi)
 # 0.35 +/- 0.04 eV
 
+#
+# k=0
+# temps = [300,285,270,240]
+# x = np.divide(1,temps)
+# yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
+# yerr=np.multiply(5e-8, np.ones(len(yy)))
+# temp2=np.multiply(temps,temps)
+# yy=np.divide(yy,temp2)
+# yy=np.multiply(yy,-1)
+# for t in range(0,len(yy)):
+#     yy[t] = np.log(yy[t])
+# p5=plt.figure(5)
+# plt.subplot(2,2,1)
+# plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
+# plt.ylabel('$ln(I/T^2)$', fontsize = 12)
+# # plt.title(title, fontsize = 12)
+# plt.errorbar(x,yy,yerr,fmt='.',c='c')
+# # plt.xticks()
+# ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
+# fit_b=ans[0]
+# fit_m=ans[1]
+# fit_x_span=np.arange(0.0032,0.0045,0.0001)
+# del_fit_b=math.sqrt(cov[0][0])
+# del_fit_m=math.sqrt(cov[1][1])
+# plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'r')
+#
+# k=3
+# yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
+# yerr=np.multiply(5e-8, np.ones(len(yy)))
+# yy=np.divide(yy,temp2)
+# yy=np.multiply(yy,-1)
+# for t in range(0,len(yy)):
+#     yy[t] = np.log(yy[t])
+# plt.subplot(2,2,2)
+# plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
+# plt.ylabel('$ln(I/T^2)$', fontsize = 12)
+# # plt.title(title, fontsize = 12)
+# plt.errorbar(x,yy,yerr,fmt='.',c='c')
+# # plt.xticks()
+# ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
+# fit_b=ans[0]
+# fit_m=ans[1]
+# fit_x_span=np.arange(0.0032,0.0045,0.0001)
+# del_fit_b=math.sqrt(cov[0][0])
+# del_fit_m=math.sqrt(cov[1][1])
+# plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'r')
+#
+# k=5
+# yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
+# yerr=np.multiply(5e-8, np.ones(len(yy)))
+# yy=np.divide(yy,temp2)
+# yy=np.multiply(yy,-1)
+# for t in range(0,len(yy)):
+#     yy[t] = np.log(yy[t])
+# plt.subplot(2,2,3)
+# plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
+# plt.ylabel('$ln(I/T^2)$', fontsize = 12)
+# # plt.title(title, fontsize = 12)
+# plt.errorbar(x,yy,yerr,fmt='.',c='c')
+# # plt.xticks()
+# ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
+# fit_b=ans[0]
+# fit_m=ans[1]
+# fit_x_span=np.arange(0.0032,0.0045,0.0001)
+# del_fit_b=math.sqrt(cov[0][0])
+# del_fit_m=math.sqrt(cov[1][1])
+# plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'r')
+
 
 # print(phi1)
 # print(phi2)
 # print(phi3)
-
 
 plt.show()
