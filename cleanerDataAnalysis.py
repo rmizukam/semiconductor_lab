@@ -21,7 +21,7 @@ ppms225=pd.read_csv('1i+2i+225.txt',delimiter='\t',header=None)
 ppms210=pd.read_csv('1i+2i+210.txt',delimiter='\t',header=None)
 
 p1 = plt.figure(1,figsize=(10.5,5))
-plt.subplot(1,2,1)
+# plt.subplot(1,2,1)
 plt.xlabel('$V_s$ [V]', fontsize = 12)
 plt.ylabel('I [mA]', fontsize = 12)
 plt.title('A', fontsize = 12)
@@ -34,16 +34,18 @@ plt.grid(True,which='both')
 # plt.plot(ppms225[0][:], ppms225[1][:], 'b', label='225 K')
 # plt.plot(ppms210[0][:], ppms210[1][:], 'orange', label='210 K')
 plt.legend()
-plt.subplot(1,2,2)
+# plt.subplot(1,2,2)
+p5 = plt.figure(5)
 plt.xlabel('$V_s$ [V]', fontsize = 12)
 plt.ylabel('I [mA]', fontsize = 12)
-plt.title('B', fontsize = 12)
+# plt.title('B', fontsize = 12)
 plt.plot(ppmsr[0][0:16], ppmsr[1][0:16], 'r', label='300 K')
 plt.plot(ppms285[0][0:16], ppms285[1][0:16], 'c', label='285 K')
 plt.plot(ppms270[0][0:16], ppms270[1][0:16], 'g', label='270 K')
 plt.plot(ppms255[0][0:16], ppms255[1][0:16], 'y', label='255 K')
 plt.plot(ppms240[0][0:16], ppms240[1][0:16], 'm', label='240 K')
 plt.grid(True,which='both')
+plt.legend()
 
 def phiHeight(fig_num,k,title):
     temps = [300,285,270,240]
@@ -85,74 +87,85 @@ print('SB Barrier = ', meanphi, ' +/- ', dmeanphi)
 # 0.35 +/- 0.04 eV
 
 
-#end of actual analysis, making graphs for report/ presentation
-#
-# k=0
-# temps = [300,285,270,240]
-# x = np.divide(1,temps)
-# yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
-# yerr=np.multiply(5e-8, np.ones(len(yy)))
-# temp2=np.multiply(temps,temps)
-# yy=np.divide(yy,temp2)
-# yy=np.multiply(yy,-1)
-# for t in range(0,len(yy)):
-#     yy[t] = np.log(yy[t])
-# p5=plt.figure(5)
-# plt.subplot(2,2,1)
-# plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
-# plt.ylabel('$ln(I/T^2)$', fontsize = 12)
-# # plt.title(title, fontsize = 12)
-# plt.errorbar(x,yy,yerr,fmt='.',c='c')
-# # plt.xticks()
-# ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
-# fit_b=ans[0]
-# fit_m=ans[1]
-# fit_x_span=np.arange(0.0032,0.0045,0.0001)
-# del_fit_b=math.sqrt(cov[0][0])
-# del_fit_m=math.sqrt(cov[1][1])
-# plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'r')
-#
-# k=3
-# yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
-# yerr=np.multiply(5e-8, np.ones(len(yy)))
-# yy=np.divide(yy,temp2)
-# yy=np.multiply(yy,-1)
-# for t in range(0,len(yy)):
-#     yy[t] = np.log(yy[t])
+# end of actual analysis, making graphs for report/ presentation
+p5=plt.figure(6)
+k=0
+temps = [300,285,270,240]
+x = np.divide(1,temps)
+yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
+yerr=np.multiply(5e-8, np.ones(len(yy)))
+temp2=np.multiply(temps,temps)
+yy=np.divide(yy,temp2)
+yy=np.multiply(yy,-1)
+for t in range(0,len(yy)):
+    yy[t] = np.log(yy[t])
+plt.xlabel('$1/T$ $[1/K]$', fontsize = 20)
+plt.ylabel('$ln(I/T^2)$', fontsize = 20)
+# plt.title("-5 V", fontsize = 12)
+plt.errorbar(x,yy,yerr,fmt='.',c='r')
+ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
+fit_b=ans[0]
+fit_m=ans[1]
+fit_x_span=np.arange(0.0032,0.0045,0.0001)
+del_fit_b=math.sqrt(cov[0][0])
+del_fit_m=math.sqrt(cov[1][1])
+plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'r',label='-5 V')
+k=3
+yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
+yerr=np.multiply(5e-8, np.ones(len(yy)))
+yy=np.divide(yy,temp2)
+yy=np.multiply(yy,-1)
+for t in range(0,len(yy)):
+    yy[t] = np.log(yy[t])
 # plt.subplot(2,2,2)
-# plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
-# plt.ylabel('$ln(I/T^2)$', fontsize = 12)
-# # plt.title(title, fontsize = 12)
-# plt.errorbar(x,yy,yerr,fmt='.',c='c')
-# # plt.xticks()
-# ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
-# fit_b=ans[0]
-# fit_m=ans[1]
-# fit_x_span=np.arange(0.0032,0.0045,0.0001)
-# del_fit_b=math.sqrt(cov[0][0])
-# del_fit_m=math.sqrt(cov[1][1])
-# plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'r')
-#
-# k=5
-# yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
-# yerr=np.multiply(5e-8, np.ones(len(yy)))
-# yy=np.divide(yy,temp2)
-# yy=np.multiply(yy,-1)
-# for t in range(0,len(yy)):
-#     yy[t] = np.log(yy[t])
+plt.xlabel('$1/T$ $[1/K]$', fontsize = 20)
+plt.ylabel('$ln(I/T^2)$', fontsize = 20)
+# plt.title('-4.7 V', fontsize = 12)
+plt.errorbar(x,yy,yerr,fmt='.',c='c')
+# plt.xticks()
+ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
+fit_b=ans[0]
+fit_m=ans[1]
+fit_x_span=np.arange(0.0032,0.0045,0.0001)
+del_fit_b=math.sqrt(cov[0][0])
+del_fit_m=math.sqrt(cov[1][1])
+plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'c',label='-4.7 V')
+
+k=5
+yy=np.multiply([ppmsr[1][k],ppms285[1][k],ppms270[1][k],ppms240[1][k]],1e-3)
+yerr=np.multiply(5e-8, np.ones(len(yy)))
+yy=np.divide(yy,temp2)
+yy=np.multiply(yy,-1)
+for t in range(0,len(yy)):
+    yy[t] = np.log(yy[t])
 # plt.subplot(2,2,3)
-# plt.xlabel('$1/T$ $[1/K]$', fontsize = 12)
-# plt.ylabel('$ln(I/T^2)$', fontsize = 12)
-# # plt.title(title, fontsize = 12)
-# plt.errorbar(x,yy,yerr,fmt='.',c='c')
-# # plt.xticks()
-# ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
-# fit_b=ans[0]
-# fit_m=ans[1]
-# fit_x_span=np.arange(0.0032,0.0045,0.0001)
-# del_fit_b=math.sqrt(cov[0][0])
-# del_fit_m=math.sqrt(cov[1][1])
-# plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'r')
+plt.xlabel('$1/T$ $[1/K]$', fontsize = 20)
+plt.ylabel('$ln(I/T^2)$', fontsize = 20)
+# plt.title("-4.5 V", fontsize = 12)
+plt.errorbar(x,yy,yerr,fmt='.',c='g')
+# plt.xticks()
+ans,cov=curve_fit(linFunc, x, yy, sigma = yerr)
+fit_b=ans[0]
+fit_m=ans[1]
+fit_x_span=np.arange(0.0032,0.0045,0.0001)
+del_fit_b=math.sqrt(cov[0][0])
+del_fit_m=math.sqrt(cov[1][1])
+plt.plot(fit_x_span,linFunc(fit_x_span,fit_b,fit_m),'g',label='-4.5 V')
+plt.legend()
+# plt.xticks(np.arange(min(fit_x_span),max(fit_x_span),0.00003))
+
+
+
+
+
+
+
+
+
+
+
+
+
 # p6 = plt.figure(6,figsize=(12,9))
 # plt.xlabel('$V_s$ [V]', fontsize = 12)
 # plt.ylabel('I [mA]', fontsize = 12)
@@ -170,5 +183,10 @@ print('SB Barrier = ', meanphi, ' +/- ', dmeanphi)
 # print(phi1)
 # print(phi2)
 # print(phi3)
-
+plt.close(p1)
+plt.close(p2)
+plt.close(p3)
+plt.close(p4)
+# plt.close(p5)
+# plt.close(p6)
 plt.show()
