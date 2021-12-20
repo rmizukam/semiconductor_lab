@@ -19,6 +19,7 @@ ppms255=pd.read_csv('1i+2i+255.txt',delimiter='\t',header=None)
 ppms240=pd.read_csv('1i+2i+240.txt',delimiter='\t',header=None)
 ppms225=pd.read_csv('1i+2i+225.txt',delimiter='\t',header=None)
 ppms210=pd.read_csv('1i+2i+210.txt',delimiter='\t',header=None)
+# \t is tab
 
 p1 = plt.figure(1,figsize=(10.5,5))
 plt.subplot(1,2,1)
